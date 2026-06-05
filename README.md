@@ -68,7 +68,7 @@ FAA5B5A0-2527-47BD-A6F9-83E4582A5BBB|string       | 1.00|string                 
 A32F42C3-32E6-4BBB-949D-C3FD1CC97FC2|string       | 1.00|string                              |
 1A2D1B38-6C9F-4D0E-8DE2-C68B5EFF1864|string Second| 1.00|b1553301-8d38-4b33-888f-33f1829d623c|
 
-## Câu 2: Tại sao lại dispose db từ trong repositories, ví khi DI DBContext sẽ được tạo ra 1 instance cho 1 http request các service trong request này đều sử dụng chung 1 instance vừa được tạo, và khi dispose từ trong repo thì các lớp khác cũng sẽ không dùng được instance đó nữa => sảy ra lỗi 
+### Câu 2: Tại sao lại dispose db từ trong repositories, ví khi DI DBContext sẽ được tạo ra 1 instance cho 1 http request các service trong request này đều sử dụng chung 1 instance vừa được tạo, và khi dispose từ trong repo thì các lớp khác cũng sẽ không dùng được instance đó nữa => sảy ra lỗi 
  ```C#
  
 public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDisposable
@@ -83,7 +83,7 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDi
  ```
  - Tuy em không thấy nó đang được sử dụng ở đâu nhưng em thắc mắc là muốn hỏi một case thực tế sử dụng nó thế nào ạ?
 
- ##Câu 3: SaveChange đang không truyền cancellationToken có phải mục đích là vẫn muốn giữ request vẫn chạy khi user cancel request đó hay không hay là có mục đích nào khác
+ ###Câu 3: SaveChange đang không truyền cancellationToken có phải mục đích là vẫn muốn giữ request vẫn chạy khi user cancel request đó hay không hay là có mục đích nào khác
  ```C#
  public class EFUnitOfWork : IUnitOfWork
 {
@@ -100,7 +100,7 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDi
 }
 ```
 
-##Câu 4: Ngoài ra em cũng muốn hỏi lại dù trước anh có trả lời 1 lần là cần break rule kiến trúc Clean Architecture để phù hợp với dự án và vì dự án muốn build một sql động để dễ custom flex query nên cần inject được thằng dbcontext vào Handler để xử lý. Nhưng nếu như này em mà gặp một ví dụ thwucj tế là em mà đang sử dụng SQLServer mà muốn thay sang PostgreSQL(vì muốn sử dụng một dùng addon riêng của nó) thì khi mình thay đổi sang một loại DB khác thì mình sẽ phải maintain toàn bộ phần Application đã inject DBContext nữa phải không ạ
+###Câu 4: Ngoài ra em cũng muốn hỏi lại dù trước anh có trả lời 1 lần là cần break rule kiến trúc Clean Architecture để phù hợp với dự án và vì dự án muốn build một sql động để dễ custom flex query nên cần inject được thằng dbcontext vào Handler để xử lý. Nhưng nếu như này em mà gặp một ví dụ thwucj tế là em mà đang sử dụng SQLServer mà muốn thay sang PostgreSQL(vì muốn sử dụng một dùng addon riêng của nó) thì khi mình thay đổi sang một loại DB khác thì mình sẽ phải maintain toàn bộ phần Application đã inject DBContext nữa phải không ạ
 ```C#
 public sealed class GetProductsQueryHandler : IQueryHandler<Query.GetProductsQuery, PagedResult<Response.ProductResponse>>
 {
