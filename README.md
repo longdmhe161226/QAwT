@@ -1,4 +1,4 @@
-### Câu 1:  SQL Injection tại Handler khi build rawquery hiện tại bên mình đang xử lý vấn đề này như nào sẽ dùng parameterized query với FromSQLInterpolate hay truyền dạng param Delare của FromSQLRaw, tại em đang thấy bên mình không dùng tới 2 thằng này để xử lý param, nên không rõ là mình có filler từ trong Middleware Pipeline không 
+### Câu 1:  SQL Injection tại Handler khi build rawquery, hiện tại bên mình đang xử lý vấn đề này như nào sẽ dùng parameterized query với FromSQLInterpolate hay truyền dạng param Delare của FromSQLRaw, tại em đang thấy bên mình không dùng tới 2 thằng này để xử lý param, nên không rõ là mình có filler từ trong Middleware Pipeline không 
 ```C#
         if (request.SortColumnAndOrder.Any()) // =>>  Raw Query when order by multi column
         {
